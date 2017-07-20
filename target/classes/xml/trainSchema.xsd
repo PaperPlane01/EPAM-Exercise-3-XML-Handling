@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema targetNamespace="http://www.w3.org/2001/MyXML"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+    <xs:element name="train" type="Train"/>
+
+    <xs:complexType name="Train">
+        <xs:sequence>
+            <xs:element name="trainID" type="xs:long" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="trainCars" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="controlCar" type="ControlCar" minOccurs="1" maxOccurs="1"/>
+                        <xs:element name="passengerCar" type="PassengerCar"/>
+                        <xs:element name="freightCar" type="FreightCar"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TrainCar">
+        <xs:sequence>
+            <xs:element name="weightCapacity" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PassengerCar">
+        <xs:complexContent>
+            <xs:extension base="TrainCar">
+                <xs:sequence>
+                    <xs:element name="passengersCapacity" type="xs:integer"/>
+                    <xs:element name="comfortLevel" type="ComfortLevel"/>
+                    <xs:element name="carNumber" type="xs:integer"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="FreightCar">
+        <xs:complexContent>
+            <xs:extension base="TrainCar">
+                <xs:sequence>
+                    <xs:element name="carNumber" type="xs:integer"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ControlCar">
+        <xs:complexContent>
+            <xs:extension base="TrainCar">
+                <xs:sequence>
+                    <xs:element name="weightCapacity" type="xs:integer"/>
+                    <xs:element name="carNumber" type="xs:element"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="ComfortLevel">
+        <xs:restriction>
+            <xs:enumeration value="LOW"/>
+            <xs:enumeration value="MIDDLE"/>
+            <xs:enumeration value="HIGH"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
