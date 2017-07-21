@@ -3,6 +3,8 @@ package kz.javalab.transportwithxml.entity.traincar.impl;
 
 import kz.javalab.transportwithxml.entity.traincar.TrainCar;
 
+import java.util.Objects;
+
 
 /**
  * Class representing a passenger car.
@@ -76,4 +78,18 @@ public class PassengerCar extends TrainCar {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        PassengerCar that = (PassengerCar) o;
+        return passengersCapacity == that.passengersCapacity &&
+                comfortLevel == that.comfortLevel;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), passengersCapacity, comfortLevel);
+    }
 }

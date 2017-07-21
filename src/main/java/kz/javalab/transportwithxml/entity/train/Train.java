@@ -4,6 +4,7 @@ import kz.javalab.transportwithxml.entity.traincar.TrainCar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Train {
     /**
@@ -72,5 +73,19 @@ public class Train {
 
     public int getNumberOfTrainCars() {
         return trainCars.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Train train = (Train) o;
+        return trainID == train.trainID &&
+                Objects.equals(trainCars, train.trainCars);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(trainCars, trainID);
     }
 }

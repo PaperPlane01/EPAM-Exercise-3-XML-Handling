@@ -22,6 +22,7 @@
 
     <xs:complexType name="TrainCar">
         <xs:sequence>
+            <xs:element name="carNumber" type="xs:integer"/>
             <xs:element name="weightCapacity" type="xs:integer"/>
         </xs:sequence>
     </xs:complexType>
@@ -32,7 +33,6 @@
                 <xs:sequence>
                     <xs:element name="passengersCapacity" type="xs:integer"/>
                     <xs:element name="comfortLevel" type="ComfortLevel"/>
-                    <xs:element name="carNumber" type="xs:integer"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -41,9 +41,6 @@
     <xs:complexType name="FreightCar">
         <xs:complexContent>
             <xs:extension base="TrainCar">
-                <xs:sequence>
-                    <xs:element name="carNumber" type="xs:integer"/>
-                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -51,10 +48,6 @@
     <xs:complexType name="ControlCar">
         <xs:complexContent>
             <xs:extension base="TrainCar">
-                <xs:sequence>
-                    <xs:element name="weightCapacity" type="xs:integer"/>
-                    <xs:element name="carNumber" type="xs:element"/>
-                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

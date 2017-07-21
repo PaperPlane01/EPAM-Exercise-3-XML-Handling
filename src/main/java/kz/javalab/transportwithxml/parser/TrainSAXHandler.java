@@ -13,7 +13,7 @@ import org.xml.sax.helpers.DefaultHandler;
 /**
  * Created by PaperPlane on 20.07.2017.
  */
-public class TrainHandler extends DefaultHandler {
+public class TrainSAXHandler extends DefaultHandler {
 
     private Train train = null;
     private boolean trainFound;
@@ -28,7 +28,7 @@ public class TrainHandler extends DefaultHandler {
     private boolean weightCapacityFound;
     private TrainCar cacheTrainCar;
 
-    public TrainHandler() {
+    public TrainSAXHandler() {
         super();
     }
 
@@ -164,8 +164,6 @@ public class TrainHandler extends DefaultHandler {
             carNumberFound = false;
         }
     }
-
-
 
     public Train getParsedTrain() {
         return train;

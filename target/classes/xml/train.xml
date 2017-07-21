@@ -3,40 +3,62 @@
    <trainID>19519819041</trainID>
     <trainCars>
         <controlCar>
-            <weightCapacity>0</weightCapacity>
             <carNumber>0</carNumber>
+            <weightCapacity>0</weightCapacity>
         </controlCar>
         <passengerCar>
-            <passengersCapacity>25</passengersCapacity>
-            <weightCapacity>1000</weightCapacity>
-            <comfortLevel>LOW</comfortLevel>
             <carNumber>1</carNumber>
-        </passengerCar>
-        <freightCar>
-            <weightCapacity>70000</weightCapacity>
-            <carNumber>2</carNumber>
-        </freightCar>
-        <passengerCar>
-            <weightCapacity>3000</weightCapacity>
-            <passengersCapacity>10</passengersCapacity>
-            <comfortLevel>HIGH</comfortLevel>
-            <carNumber>3</carNumber>
-        </passengerCar>
-        <freightCar>
-            <weightCapacity>10000</weightCapacity>
-            <carNumber>4</carNumber>
-        </freightCar>
-        <passengerCar>
             <weightCapacity>5000</weightCapacity>
             <passengersCapacity>30</passengersCapacity>
-            <comfortLevel>LOW</comfortLevel>
-            <carNumber>5</carNumber>
+            <comfortLevel>MIDDLE</comfortLevel>
         </passengerCar>
         <passengerCar>
-            <weightCapacity>40000</weightCapacity>
-            <passengersCapacity>17</passengersCapacity>
-            <comfortLevel>MIDDLE</comfortLevel>
-            <carNumber>6</carNumber>
+            <carNumber>2</carNumber>
+            <weightCapacity>4000</weightCapacity>
+            <passengersCapacity>15</passengersCapacity>
+            <comfortLevel>HIGH</comfortLevel>
         </passengerCar>
+        <passengerCar>
+            <carNumber>3</carNumber>
+            <weightCapacity>7000</weightCapacity>
+            <passengersCapacity>45</passengersCapacity>
+            <comfortLevel>LOW</comfortLevel>
+        </passengerCar>
+        <passengerCar>
+            <carNumber>4</carNumber>
+            <weightCapacity>5000</weightCapacity>
+            <passengersCapacity>25</passengersCapacity>
+            <comfortLevel>LOW</comfortLevel>
+        </passengerCar>
+        <freightCar>
+            <carNumber>5</carNumber>
+            <weightCapacity>20000</weightCapacity>
+        </freightCar>
+        <passengerCar>
+            <carNumber>6</carNumber>
+            <weightCapacity>10000</weightCapacity>
+            <passengersCapacity>50</passengersCapacity>
+            <comfortLevel>LOW</comfortLevel>
+        </passengerCar>
+        <passengerCar>
+            <carNumber>7</carNumber>
+            <weightCapacity>5000</weightCapacity>
+            <passengersCapacity>10</passengersCapacity>
+            <comfortLevel>HIGH</comfortLevel>
+        </passengerCar>
+        <passengerCar>
+            <carNumber>8</carNumber>
+            <weightCapacity>7500</weightCapacity>
+            <passengersCapacity>30</passengersCapacity>
+            <comfortLevel>MIDDLE</comfortLevel>
+        </passengerCar>
+        <freightCar>
+            <carNumber>9</carNumber>
+            <weightCapacity>20000</weightCapacity>
+        </freightCar>
+        <freightCar>
+            <carNumber>10</carNumber>
+            <weightCapacity>25571</weightCapacity>
+        </freightCar>
     </trainCars>
 </train>
