@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema targetNamespace="http://www.w3.org/2001/MyXML"
+<xs:schema targetNamespace="http://www.w3.org/2001/XMLSchema/MyXML"
            elementFormDefault="qualified"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
->
-    <xs:element name="train" type="Train"/>
+           xmlns:w="http://www.w3.org/2001/XMLSchema/MyXML">
+    <xs:element name="train" type="w:Train"/>
 
     <xs:complexType name="Train">
         <xs:sequence>
             <xs:element name="trainID" type="xs:long" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="trainCars" minOccurs="1" maxOccurs="1">
-                <xs:complexType>
-                    <xs:all>
-                        <xs:element name="controlCar" type="ControlCar" minOccurs="1" maxOccurs="1"/>
-                        <xs:element name="passengerCar" type="PassengerCar"/>
-                        <xs:element name="freightCar" type="FreightCar"/>
-                    </xs:all>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="trainCars" type="w:ListOfTrainCars"/>
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="TrainCar">
+    <xs:complexType name="ListOfTrainCars">
+       <xs:sequence>
+           <xs:choice minOccurs="0" maxOccurs="unbounded">
+               <xs:element name="controlCar" type="w:ControlCar" minOccurs="1" maxOccurs="1"/>
+               <xs:element name="passengerCar" type="w:PassengerCar" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element name="freightCar" type="w:FreightCar" minOccurs="0" maxOccurs="unbounded"/>
+           </xs:choice>
+       </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType abstract="true" name="TrainCar">
         <xs:sequence>
             <xs:element name="carNumber" type="xs:integer"/>
             <xs:element name="weightCapacity" type="xs:integer"/>
@@ -29,10 +31,10 @@
 
     <xs:complexType name="PassengerCar">
         <xs:complexContent>
-            <xs:extension base="TrainCar">
+            <xs:extension base="w:TrainCar">
                 <xs:sequence>
                     <xs:element name="passengersCapacity" type="xs:integer"/>
-                    <xs:element name="comfortLevel" type="ComfortLevel"/>
+                    <xs:element name="comfortLevel" type="w:ComfortLevel"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -40,21 +42,21 @@
 
     <xs:complexType name="FreightCar">
         <xs:complexContent>
-            <xs:extension base="TrainCar">
+            <xs:extension base="w:TrainCar">
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="ControlCar">
         <xs:complexContent>
-            <xs:extension base="TrainCar">
+            <xs:extension base="w:TrainCar">
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <xs:simpleType name="ComfortLevel">
-        <xs:restriction>
-            <xs:enumeration value="LOW"/>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="LOW" />
             <xs:enumeration value="MIDDLE"/>
             <xs:enumeration value="HIGH"/>
         </xs:restriction>
