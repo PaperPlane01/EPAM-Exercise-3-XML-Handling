@@ -42,12 +42,10 @@ public class TrainDOMParser {
 
 
             Node trainIDNode = trainProperties.item(trainIDIndex);
-            System.out.println(trainProperties.item(trainIDIndex).getNodeName());
             Long trainID = Long.valueOf(trainIDNode.getTextContent());
             train.setTrainID(trainID);
 
             Node trainCarsNode = trainProperties.item(trainCarsIndex);
-            System.out.println(trainCarsNode.getNodeName());
             NodeList listOfTrainCars = trainCarsNode.getChildNodes();
 
             for (int index = 0; index < listOfTrainCars.getLength(); index++) {

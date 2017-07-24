@@ -3,6 +3,7 @@
            elementFormDefault="qualified"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:w="http://www.w3.org/2001/XMLSchema/MyXML">
+
     <xs:element name="train" type="w:Train"/>
 
     <xs:complexType name="Train">

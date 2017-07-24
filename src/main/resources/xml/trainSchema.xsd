@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema targetNamespace="http://www.w3.org/2001/XMLSchema/MyXML"
-           elementFormDefault="qualified"
-           xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:w="http://www.w3.org/2001/XMLSchema/MyXML">
-    <xs:element name="train" type="w:Train"/>
+<xs:schema
+        targetNamespace="http://www.w3.org/2001/XMLSchema/MyXML"
+        elementFormDefault="qualified"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:w="http://www.w3.org/2001/XMLSchema/MyXML">>
 
     <xs:complexType name="Train">
         <xs:sequence>
@@ -61,5 +61,7 @@
             <xs:enumeration value="HIGH"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:element name="train" type="w:Train"/>
 
 </xs:schema>
