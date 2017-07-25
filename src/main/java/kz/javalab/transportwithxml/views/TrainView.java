@@ -40,7 +40,7 @@ public class TrainView implements View {
     }
 
     public void setTrain(Train train) {
-        this.model = model;
+        this.model = train;
     }
 
     @Override

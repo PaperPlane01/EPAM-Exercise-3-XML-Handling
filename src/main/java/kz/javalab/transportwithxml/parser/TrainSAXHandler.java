@@ -44,53 +44,47 @@ public class TrainSAXHandler extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        if (qName.equals("train")) {
-            trainFound = true;
-        }
-
-        if (qName.equals("trainID")) {
-            trainIDFound = true;
-        }
-
-        if (qName.equals("trainCars")) {
-            trainCarsFound = true;
-        }
-
-        if (qName.equals("controlCar")) {
-            controlCarFound = true;
-        }
-
-        if (qName.equals("passengerCar")) {
-            passengerCarFound = true;
-        }
-
-        if (qName.equals("freightCar")) {
-            freightCarFound = true;
-        }
-
-        if (qName.equals("weightCapacity")) {
-            weightCapacityFound = true;
-        }
-
-        if (qName.equals("passengersCapacity")) {
-            passengersCapacityFound = true;
-        }
-
-        if (qName.equals("comfortLevel")) {
-            comfortLevelFound = true;
-        }
-
-        if (qName.equals("carNumber")) {
-            carNumberFound = true;
+        switch (qName) {
+            case TrainXMLConstants.TagNames.TRAIN:
+                trainFound = true;
+                break;
+            case TrainXMLConstants.TagNames.TRAIN_ID:
+                trainIDFound = true;
+                break;
+            case TrainXMLConstants.TagNames.TRAIN_CARS:
+                trainCarsFound = true;
+                break;
+            case TrainXMLConstants.TagNames.CONTROL_CAR:
+                controlCarFound = true;
+                break;
+            case TrainXMLConstants.TagNames.FREIGHT_CAR:
+                freightCarFound = true;
+                break;
+            case TrainXMLConstants.TagNames.PASSENGER_CAR:
+                passengerCarFound = true;
+                break;
+            case TrainXMLConstants.TagNames.CAR_NUMBER:
+                carNumberFound = true;
+                break;
+            case TrainXMLConstants.TagNames.WEIGHT_CAPACITY:
+                weightCapacityFound = true;
+                break;
+            case TrainXMLConstants.TagNames.PASSENGERS_CAPACITY:
+                passengersCapacityFound = true;
+                break;
+            case TrainXMLConstants.TagNames.COMFORT_LEVEL:
+                comfortLevelFound = true;
+                break;
+            default:
+                break;
         }
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        if ((qName.equals("passengerCar"))
-                || (qName.equals("controlCar"))
-                || (qName.equals("freightCar"))
-                || (qName.equals("trainCar"))) {
+        if ((qName.equals(TrainXMLConstants.TagNames.PASSENGER_CAR))
+                || (qName.equals(TrainXMLConstants.TagNames.CONTROL_CAR))
+                || (qName.equals(TrainXMLConstants.TagNames.FREIGHT_CAR))) {
             train.addTrainCar(cacheTrainCar);
         }
 
@@ -143,20 +137,24 @@ public class TrainSAXHandler extends DefaultHandler {
         if (comfortLevelFound) {
             String comfortLevel = new String(ch, start, length);
 
-            if ("LOW".equals(comfortLevel)) {
-                ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.LOW);
-            }
-
-            if ("MIDDLE".equals(comfortLevel)) {
-                ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.MIDDLE);
-            }
-
-            if ("HIGH".equals(comfortLevel)) {
-                ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.HIGH);
-            }
-
+            switch (comfortLevel) {
+                case TrainXMLConstants.ComfortLevels.LOW:
+                    ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.LOW);
+                    break;
+                case TrainXMLConstants.ComfortLevels.MIDDLE:
+                    ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.MIDDLE);
+                    break;
+                case TrainXMLConstants.ComfortLevels.HIGH:
+                    ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.HIGH);
+                    break;
+                default:
+                    break;
+                }
             comfortLevelFound = false;
         }
+
+
+
 
         if (carNumberFound) {
             int carNumber = Integer.valueOf(new String(ch, start, length));

@@ -49,17 +49,24 @@ public class TrainDOMParser {
             NodeList listOfTrainCars = trainCarsNode.getChildNodes();
 
             for (int index = 0; index < listOfTrainCars.getLength(); index++) {
-                if (listOfTrainCars.item(index).getNodeName().equals("controlCar")) {
-                    ControlCar controlCar = parseControlCar(listOfTrainCars.item(index));
-                    train.addTrainCar(controlCar);
-                } else if (listOfTrainCars.item(index).getNodeName().equals("passengerCar")) {
-                    PassengerCar passengerCar = parsePassengerCar(listOfTrainCars.item(index));
-                    train.addTrainCar(passengerCar);
-                } else if (listOfTrainCars.item(index).getNodeName().equals("freightCar")) {
-                    FreightCar freightCar = parseFreightCar(listOfTrainCars.item(index));
-                    train.addTrainCar(freightCar);
+                switch (listOfTrainCars.item(index).getNodeName()) {
+                    case TrainXMLConstants.TagNames.CONTROL_CAR:
+                        ControlCar controlCar = parseControlCar(listOfTrainCars.item(index));
+                        train.addTrainCar(controlCar);
+                        break;
+                    case TrainXMLConstants.TagNames.PASSENGER_CAR:
+                        PassengerCar passengerCar = parsePassengerCar(listOfTrainCars.item(index));
+                        train.addTrainCar(passengerCar);
+                        break;
+                    case TrainXMLConstants.TagNames.FREIGHT_CAR:
+                        FreightCar freightCar = parseFreightCar(listOfTrainCars.item(index));
+                        train.addTrainCar(freightCar);
+                        break;
+                    default:
+                        break;
+                    }
                 }
-            }
+
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
@@ -86,24 +93,32 @@ public class TrainDOMParser {
     private TrainCar parseTrainCar(int trainCarType, Node trainCarNode) {
         TrainCar parsedTrainCar = null;
 
-        if (trainCarType == 1) {
-            parsedTrainCar = new ControlCar();
-        } else if (trainCarType == 2) {
-            parsedTrainCar = new FreightCar();
+        switch (trainCarType) {
+            case 1:
+                parsedTrainCar = new ControlCar();
+                break;
+            case 2:
+                parsedTrainCar = new FreightCar();
+                break;
+            default:
+                break;
         }
 
         NodeList trainCarProperties = trainCarNode.getChildNodes();
 
         for (int index = 0; index < trainCarProperties.getLength(); index++) {
             if (trainCarProperties.item(index).getNodeType() == Node.ELEMENT_NODE) {
-                if (((Element) trainCarProperties.item(index)).getTagName().equals("carNumber")) {
-                    int carNumber = Integer.valueOf(trainCarProperties.item(index).getTextContent());
-                    parsedTrainCar.setCarNumber(carNumber);
-                }
-
-                if (((Element) trainCarProperties.item(index)).getTagName().equals("weightCapacity")) {
-                    int weightCapacity = Integer.valueOf(trainCarProperties.item(index).getTextContent());
-                    parsedTrainCar.setWeightCapacity(weightCapacity);
+                switch (((Element) trainCarProperties.item(index)).getTagName()) {
+                    case TrainXMLConstants.TagNames.CAR_NUMBER:
+                        int carNumber = Integer.valueOf(trainCarProperties.item(index).getTextContent());
+                        parsedTrainCar.setCarNumber(carNumber);
+                        break;
+                    case TrainXMLConstants.TagNames.WEIGHT_CAPACITY:
+                        int weightCapacity = Integer.valueOf(trainCarProperties.item(index).getTextContent());
+                        parsedTrainCar.setWeightCapacity(weightCapacity);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -119,36 +134,38 @@ public class TrainDOMParser {
 
         for (int index = 0; index < passengerCarProperties.getLength(); index++) {
             if (passengerCarProperties.item(index).getNodeType() == Node.ELEMENT_NODE) {
-                if (((Element) passengerCarProperties.item(index)).getTagName().equals("carNumber")) {
-                    int carNumber = Integer.valueOf(passengerCarProperties.item(index).getTextContent());
-                    parsedPassengerCar.setCarNumber(carNumber);
-                }
-                if (((Element) passengerCarProperties.item(index)).getTagName().equals("weightCapacity")) {
-                    int weightCapacity = Integer.valueOf(passengerCarProperties.item(index).getTextContent());
-                   parsedPassengerCar.setWeightCapacity(weightCapacity);
+                switch (((Element) passengerCarProperties.item(index)).getTagName()) {
+                    case TrainXMLConstants.TagNames.CAR_NUMBER:
+                        int carNumber = Integer.valueOf(passengerCarProperties.item(index).getTextContent());
+                        parsedPassengerCar.setCarNumber(carNumber);
+                        break;
+                    case TrainXMLConstants.TagNames.WEIGHT_CAPACITY:
+                        int weightCapacity = Integer.valueOf(passengerCarProperties.item(index).getTextContent());
+                        parsedPassengerCar.setWeightCapacity(weightCapacity);
+                        break;
+                    case TrainXMLConstants.TagNames.PASSENGERS_CAPACITY:
+                        int passengersCapacity = Integer.valueOf(passengerCarProperties.item(index).getTextContent());
+                        parsedPassengerCar.setPassengersCapacity(passengersCapacity);
+                        break;
+                    case TrainXMLConstants.TagNames.COMFORT_LEVEL:
+                        String comfortLevel = passengerCarProperties.item(index).getTextContent();
+                        switch (comfortLevel) {
+                            case TrainXMLConstants.ComfortLevels.LOW:
+                                parsedPassengerCar.setComfortLevel(ComfortLevel.LOW);
+                                break;
+                            case TrainXMLConstants.ComfortLevels.MIDDLE:
+                                parsedPassengerCar.setComfortLevel(ComfortLevel.MIDDLE);
+                                break;
+                            case TrainXMLConstants.ComfortLevels.HIGH:
+                                parsedPassengerCar.setComfortLevel(ComfortLevel.HIGH);
+                                break;
+                            default:
+                                break;
+                        }
+                    default:
+                        break;
                 }
 
-                if (((Element) passengerCarProperties.item(index)).getTagName().equals("passengersCapacity")) {
-                    int passengersCapacity = Integer.valueOf(passengerCarProperties.item(index).getTextContent());
-                    parsedPassengerCar.setPassengersCapacity(passengersCapacity);
-                }
-
-                if (((Element) passengerCarProperties.item(index)).getTagName().equals("comfortLevel")) {
-                    String comfortLevel = passengerCarProperties.item(index).getTextContent();
-                    switch (comfortLevel) {
-                        case "LOW":
-                            parsedPassengerCar.setComfortLevel(ComfortLevel.LOW);
-                            break;
-                        case "MIDDLE":
-                            parsedPassengerCar.setComfortLevel(ComfortLevel.MIDDLE);
-                            break;
-                        case "HIGH":
-                            parsedPassengerCar.setComfortLevel(ComfortLevel.HIGH);
-                            break;
-                        default:
-                            break;
-                    }
-                }
             }
         }
 

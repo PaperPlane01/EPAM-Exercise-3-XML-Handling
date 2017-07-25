@@ -22,43 +22,16 @@ import java.io.IOException;
 public class TrainXMLValidator {
 
     public static boolean isValidating(String xmlFileLocation, String schemaLocation) {
-        DocumentBuilder parser = null;
-        boolean result = true;
         try {
-            parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-            result = false;
+            SchemaFactory factory =
+                    SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = factory.newSchema(new File(schemaLocation));
+            Validator validator = schema.newValidator();
+            validator.validate(new StreamSource(new File(xmlFileLocation)));
+        } catch (IOException | SAXException e) {
+            System.out.println("Exception: "+e.getMessage());
+            return false;
         }
-
-        Document document = null;
-        try {
-            document = parser.parse(new File(xmlFileLocation));
-        } catch (SAXException | IOException e) {
-            e.printStackTrace();
-            result = false;
-        }
-
-        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-        Source schemaFile = new StreamSource(new File(schemaLocation));
-        Schema schema = null;
-        try {
-            schema = factory.newSchema(schemaFile);
-        } catch (SAXException e) {
-            e.printStackTrace();
-            result = false;
-        }
-
-        Validator validator = schema.newValidator();
-
-        try {
-            validator.validate(new DOMSource(document));
-        } catch (SAXException | IOException e) {
-            e.printStackTrace();
-            result = false;
-        }
-
-        return result;
+        return true;
     }
 }

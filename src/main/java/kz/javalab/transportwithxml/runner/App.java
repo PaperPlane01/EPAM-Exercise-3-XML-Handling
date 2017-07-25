@@ -10,17 +10,9 @@ import kz.javalab.transportwithxml.parser.TrainXMLValidator;
 import org.xml.sax.SAXException;
 import kz.javalab.transportwithxml.views.TrainManagerView;
 
-import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import javax.xml.transform.Source;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
-import java.io.File;
 import java.io.IOException;
 
 public class App {
@@ -30,7 +22,9 @@ public class App {
 
     public static void main(String[] args) {
 
-        System.out.println(TrainXMLValidator.isValidating(FILE_PATH, SCHEMA_PATH));
+        if (TrainXMLValidator.isValidating(FILE_PATH, SCHEMA_PATH)) {
+            System.out.println("File successfully validated.");
+        }
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = null;

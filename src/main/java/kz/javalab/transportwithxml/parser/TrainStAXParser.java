@@ -73,44 +73,39 @@ public class TrainStAXParser {
     private void parseStartElement(StartElement startElement) {
         String qName = startElement.getName().getLocalPart();
 
-        if (qName.equals("train")) {
-            trainFound = true;
-        }
-
-        if (qName.equals("trainID")) {
-            trainIDFound = true;
-        }
-
-        if (qName.equals("trainCars")) {
-            trainCarsFound = true;
-        }
-
-        if (qName.equals("controlCar")) {
-            controlCarFound = true;
-        }
-
-        if (qName.equals("passengerCar")) {
-            passengerCarFound = true;
-        }
-
-        if (qName.equals("freightCar")) {
-            freightCarFound = true;
-        }
-
-        if (qName.equals("weightCapacity")) {
-            weightCapacityFound = true;
-        }
-
-        if (qName.equals("passengersCapacity")) {
-            passengersCapacityFound = true;
-        }
-
-        if (qName.equals("comfortLevel")) {
-            comfortLevelFound = true;
-        }
-
-        if (qName.equals("carNumber")) {
-            carNumberFound = true;
+        switch (qName) {
+            case TrainXMLConstants.TagNames.TRAIN:
+                trainFound = true;
+                break;
+            case TrainXMLConstants.TagNames.TRAIN_ID:
+                trainIDFound = true;
+                break;
+            case TrainXMLConstants.TagNames.TRAIN_CARS:
+                trainCarsFound = true;
+                break;
+            case TrainXMLConstants.TagNames.CONTROL_CAR:
+                controlCarFound = true;
+                break;
+            case TrainXMLConstants.TagNames.FREIGHT_CAR:
+                freightCarFound = true;
+                break;
+            case TrainXMLConstants.TagNames.PASSENGER_CAR:
+                passengerCarFound = true;
+                break;
+            case TrainXMLConstants.TagNames.CAR_NUMBER:
+                carNumberFound = true;
+                break;
+            case TrainXMLConstants.TagNames.WEIGHT_CAPACITY:
+                weightCapacityFound = true;
+                break;
+            case TrainXMLConstants.TagNames.PASSENGERS_CAPACITY:
+                passengersCapacityFound = true;
+                break;
+            case TrainXMLConstants.TagNames.COMFORT_LEVEL:
+                comfortLevelFound = true;
+                break;
+            default:
+                break;
         }
 
     }
@@ -161,18 +156,19 @@ public class TrainStAXParser {
         if (comfortLevelFound) {
             String comfortLevel = characters.getData();
 
-            if ("LOW".equals(comfortLevel)) {
-                ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.LOW);
+            switch (comfortLevel) {
+                case TrainXMLConstants.ComfortLevels.LOW:
+                    ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.LOW);
+                    break;
+                case TrainXMLConstants.ComfortLevels.MIDDLE:
+                    ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.MIDDLE);
+                    break;
+                case TrainXMLConstants.ComfortLevels.HIGH:
+                    ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.HIGH);
+                    break;
+                default:
+                    break;
             }
-
-            if ("MIDDLE".equals(comfortLevel)) {
-                ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.MIDDLE);
-            }
-
-            if ("HIGH".equals(comfortLevel)) {
-                ((PassengerCar) cacheTrainCar).setComfortLevel(ComfortLevel.HIGH);
-            }
-
             comfortLevelFound = false;
         }
 
@@ -186,10 +182,9 @@ public class TrainStAXParser {
     private void parseEndElement(EndElement endElement) {
         String qName = endElement.getName().getLocalPart();
 
-        if ((qName.equals("passengerCar"))
-                || (qName.equals("controlCar"))
-                || (qName.equals("freightCar"))
-                || (qName.equals("trainCar"))) {
+        if ((qName.equals(TrainXMLConstants.TagNames.PASSENGER_CAR))
+                || (qName.equals(TrainXMLConstants.TagNames.CONTROL_CAR))
+                || (qName.equals(TrainXMLConstants.TagNames.FREIGHT_CAR))) {
             train.addTrainCar(cacheTrainCar);
         }
 
