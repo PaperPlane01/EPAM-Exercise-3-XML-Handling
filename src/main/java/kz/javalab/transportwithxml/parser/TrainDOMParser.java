@@ -19,11 +19,20 @@ import java.io.IOException;
 
 /**
  * Created by PaperPlane on 21.07.2017.
+ * This class is designated for parsing <Code>Train</Code> instance from XML file via DOM method.
  */
 public class TrainDOMParser {
 
+    /**
+     * The result of parsing.
+     */
     private Train train = null;
 
+    /**
+     * Parses <Code>Train</Code> instance from XML file via DOM method.
+     * @param filePath Path of the XML file which is to be parsed.
+     * @return Parsed train.
+     */
     public Train parseTrain(String filePath) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
@@ -74,11 +83,21 @@ public class TrainDOMParser {
         return train;
     }
 
+    /**
+     * Parses control car from the node.
+     * @param controlCarNode Node of XML document containing data.
+     * @return Node of XML document containing data.
+     */
     private ControlCar parseControlCar(Node controlCarNode) {
         int trainCarType = 1;
         return  (ControlCar) parseTrainCar(trainCarType, controlCarNode);
     }
 
+    /**
+     * Parses freight car from the node.
+     * @param freightCarNode
+     * @return
+     */
     private FreightCar parseFreightCar(Node freightCarNode) {
        int trainCarType = 2;
        return  (FreightCar) parseTrainCar(trainCarType, freightCarNode);
@@ -127,6 +146,11 @@ public class TrainDOMParser {
     }
 
 
+    /**
+     * Parses passenger car or freight car from the node.
+     * @param passengerCarNode Node of XML document containing data.
+     * @return Parsed passenger car.
+     */
     private PassengerCar parsePassengerCar (Node passengerCarNode) {
         PassengerCar parsedPassengerCar = new PassengerCar();
 

@@ -12,34 +12,61 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Created by PaperPlane on 20.07.2017.
+ * This class is designated for parsing <Code>Train</Code> instance from XML file via SAX method.
  */
 public class TrainSAXHandler extends DefaultHandler {
 
+    /**
+     * <Code>Train</Code> instance parsed from the XML file.
+     */
     private Train train = null;
+    /**
+     * Indicates if <Code>train</Code> element was found.
+     */
     private boolean trainFound;
+    /**
+     * Indicates if <Code>trainID</Code> element was found.
+     */
     private boolean trainIDFound;
+    /**
+     * Indicates if <Code>trainCars</Code> element was found.
+     */
     private boolean trainCarsFound;
+    /**
+     * Indicates if <Code>controlCar</Code> element was found.
+     */
     private boolean controlCarFound;
+    /**
+     * Indicates if <Code>passengerCar</Code> element was found.
+     */
     private boolean passengerCarFound;
+    /**
+     * Indicates if <Code>freightCar</Code> element was found.
+     */
     private boolean freightCarFound;
+    /**
+     * Indicates if <Code>carNumber</Code> element was found.
+     */
     private boolean carNumberFound;
+    /**
+     * Indicates if <Code>passengersCapacity</Code> element was found.
+     */
     private boolean passengersCapacityFound;
+    /**
+     * Indicates if <Code>comfortLevel</Code> element was found.
+     */
     private boolean comfortLevelFound;
+    /**
+     * Indicates if <Code>weightCapacity</Code> element was found.
+     */
     private boolean weightCapacityFound;
+    /**
+     * Intermediate <Code>TrainCar</Code> instance which is parsed from XML file.
+     */
     private TrainCar cacheTrainCar;
 
     public TrainSAXHandler() {
         super();
-    }
-
-    @Override
-    public void startDocument() throws SAXException {
-        super.startDocument();
-    }
-
-    @Override
-    public void endDocument() throws SAXException {
-        super.endDocument();
     }
 
     @Override

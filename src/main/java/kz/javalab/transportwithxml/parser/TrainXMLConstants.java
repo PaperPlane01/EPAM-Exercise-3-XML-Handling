@@ -2,8 +2,12 @@ package kz.javalab.transportwithxml.parser;
 
 /**
  * Created by PaperPlane on 24.07.2017.
+ * This class contains constants related to parsing <Code>Train</Code> instance from the XML file.
  */
 public class TrainXMLConstants {
+    /**
+     * Contains name of the tags.
+     */
     public static class TagNames {
         public static final String TRAIN = "train";
         public static final String TRAIN_ID = "trainID";
@@ -17,6 +21,9 @@ public class TrainXMLConstants {
         public static final String COMFORT_LEVEL = "comfortLevel";
     }
 
+    /**
+     * Contains possible comfort levels.
+     */
     public static class ComfortLevels {
         public static final String LOW = "LOW";
         public static final String MIDDLE = "MIDDLE";

@@ -20,24 +20,66 @@ import java.io.FileNotFoundException;
 
 /**
  * Created by PaperPlane on 21.07.2017.
+ * This class is designated for parsing <Code>Train</Code> instance from XML file via StAX method.
  */
 public class TrainStAXParser {
+    /**
+     * <Code>Train</Code> instance parsed from the XML file.
+     */
     private Train train = null;
+    /**
+     * Indicates if <Code>train</Code> element was found.
+     */
     private boolean trainFound;
+    /**
+     * Indicates if <Code>trainID</Code> element was found.
+     */
     private boolean trainIDFound;
+    /**
+     * Indicates if <Code>trainCars</Code> element was found.
+     */
     private boolean trainCarsFound;
+    /**
+     * Indicates if <Code>controlCar</Code> element was found.
+     */
     private boolean controlCarFound;
+    /**
+     * Indicates if <Code>passengerCar</Code> element was found.
+     */
     private boolean passengerCarFound;
+    /**
+     * Indicates if <Code>freightCar</Code> element was found.
+     */
     private boolean freightCarFound;
+    /**
+     * Indicates if <Code>carNumber</Code> element was found.
+     */
     private boolean carNumberFound;
+    /**
+     * Indicates if <Code>passengersCapacity</Code> element was found.
+     */
     private boolean passengersCapacityFound;
+    /**
+     * Indicates if <Code>comfortLevel</Code> element was found.
+     */
     private boolean comfortLevelFound;
+    /**
+     * Indicates if <Code>weightCapacity</Code> element was found.
+     */
     private boolean weightCapacityFound;
+    /**
+     * Intermediate <Code>TrainCar</Code> instance which is parsed from XML file.
+     */
     private TrainCar cacheTrainCar;
 
     public TrainStAXParser() {
     }
 
+    /**
+     * Parses <Code>Train</Code> instance from the specified XML file.
+     * @param pathToFile Path to the XML file.
+     * @return Parsed <Code>Train</Code> instance.
+     */
     public Train parseTrainInstanceFromXMLFile(String pathToFile) {
 
         XMLInputFactory inputFactory = XMLInputFactory.newFactory();
@@ -70,6 +112,10 @@ public class TrainStAXParser {
         return train;
     }
 
+    /**
+     * Parses start element of XML file.
+     * @param startElement Start element to be parsed.
+     */
     private void parseStartElement(StartElement startElement) {
         String qName = startElement.getName().getLocalPart();
 
@@ -110,6 +156,10 @@ public class TrainStAXParser {
 
     }
 
+    /**
+     * Parses characters contained between tags.
+     * @param characters Characters to be parsed.
+     */
     private void parseCharacters(Characters characters) {
         if (trainFound) {
             train = new Train();
@@ -179,6 +229,10 @@ public class TrainStAXParser {
         }
     }
 
+    /**
+     * Parsed end element of the XML file.
+     * @param endElement End element to be parsed.
+     */
     private void parseEndElement(EndElement endElement) {
         String qName = endElement.getName().getLocalPart();
 
